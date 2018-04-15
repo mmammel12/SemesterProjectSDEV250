@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="SDEV 250 Semester Project">
+  <meta name="author" content="Marty Mammel">
+
+  <link rel="icon" href="js.png" type="image/x-icon">
+
+  <link href="marty.css" rel="stylesheet">
+
+</head>
+<body>
+  <div class="title-bar">
+    <h1>SDEV 250 Semester Project</h1>
+    <hr>
+  </div>
+
+  <div class="user-data">
+    <div id="inputData">
+      <h2>Enter Name:</h2>
+      <input id="usernameInput" type="text">
+      <div class="errorMessage"></div>
+      <div class="username-buttons">
+        <button id="usernameAcceptBtn">Accept</button>
+        <button id="usernameClearBtn">Clear</button>
+      </div>
+    </div>
+    <div id="displayData">
+      <p id="username">Marty</p>
+      <div id="addDisplay">
+        <hr class="small-hr">
+        <p class="dataTitle">Addition</p>
+        <div class="addCorrectData">
+          <p class="correct">Correct:</p>
+          <p id="addCorrect">0</p>
+        </div>
+        <div class="addIncorrectData">
+          <p class="incorrect">Incorrect:</p>
+          <p id="addInorrect">0</p>
+        </div>
+      </div>
+      <div id="subDisplay">
+        <hr class="small-hr">
+        <p class="dataTitle">Subtraction</p>
+        <div class="subCorrectData">
+          <p class="correct">Correct:</p>
+          <p id="subCorrect">0</p>
+        </div>
+        <div class="subIncorrectData">
+          <p class="incorrect">Incorrect:</p>
+          <p id="subInorrect">0</p>
+        </div>
+      </div>
+      <div id="multDisplay">
+        <hr class="small-hr">
+        <p class="dataTitle">Multiplication</p>
+        <div class="multCorrectData">
+          <p class="correct">Correct:</p>
+          <p id="multCorrect">0</p>
+        </div>
+        <div class="multIncorrectData">
+          <p class="incorrect">Incorrect:</p>
+          <p id="multInorrect">0</p>
+        </div>
+      </div>
+      <div id="divDisplay">
+        <hr class="small-hr">
+        <p class="dataTitle">Division</p>
+        <div class="divCorrectData">
+          <p class="correct">Correct:</p>
+          <p id="divCorrect">0</p>
+        </div>
+        <div class="divIncorrectData">
+          <p class="incorrect">Incorrect:</p>
+          <p id="divInorrect">0</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="addition">
+    <hr class="medium-hr">
+    <h2>Addition</h2>
+    <div class="input-labels">
+      <p class="left-label">Lower Limit</p>
+      <p class="right-label">Upper Limit</p>
+    </div>
+    <div class="input-textbox">
+      <input id="addLowerLimit" type="text">
+      <input id="addUpperLimit" type="text">
+    </div>
+    <div class="errorMessage"></div>
+    <div class="display-problem">
+      <p id="addProblemLeft">&#8709;</p>
+      <p class="operator-symbol">&#43;</p>
+      <p id="addProblemRight">&#8709;</p>
+    </div>
+    <div class="solution-area">
+      <p class="operator-symbol">&#61;</p>
+      <input id="addAnswerInput" type="text">
+    </div>
+    <div class="button-area">
+      <button id="addCheckBtn">Check</button>
+      <button id="addAnswerBtn">Answer</button>
+      <button id="addNextBtn">Next</button>
+    </div>
+  </div>
+
+  <div class="subtraction">
+    <hr class="medium-hr">
+    <h2>Subtraction</h2>
+    <div class="input-labels">
+      <p class="left-label">Lower Limit</p>
+      <p class="right-label">Upper Limit</p>
+    </div>
+    <div class="input-textbox">
+      <input id="subLowerLimit" type="text">
+      <input id="subUpperLimit" type="text">
+    </div>
+    <div class="errorMessage"></div>
+    <div class="display-problem">
+      <p id="subProblemLeft">&#8709;</p>
+      <p class="operator-symbol">&#8722;</p>
+      <p id="subProblemRight">&#8709;</p>
+    </div>
+    <div class="solution-area">
+      <p class="operator-symbol">&#61;</p>
+      <input id="subAnswerInput" type="text">
+    </div>
+    <div class="button-area">
+      <button id="subCheckBtn">Check</button>
+      <button id="subAnswerBtn">Answer</button>
+      <button id="subNextBtn">Next</button>
+    </div>
+  </div>
+
+  <div class="multiplication">
+    <hr class="medium-hr">
+    <h2>Multiplication</h2>
+    <div class="input-labels">
+      <p class="left-label">Lower Limit</p>
+      <p class="right-label">Upper Limit</p>
+    </div>
+    <div class="input-textbox">
+      <input id="multLowerLimit" type="text">
+      <input id="multUpperLimit" type="text">
+    </div>
+    <div class="errorMessage"></div>
+    <div class="display-problem">
+      <p id="multProblemLeft">&#8709;</p>
+      <p class="operator-symbol">&#215;</p>
+      <p id="multProblemRight">&#8709;</p>
+    </div>
+    <div class="solution-area">
+      <p class="operator-symbol">&#61;</p>
+      <input id="multAnswerInput" type="text">
+    </div>
+    <div class="button-area">
+      <button id="multCheckBtn">Check</button>
+      <button id="multAnswerBtn">Answer</button>
+      <button id="multNextBtn">Next</button>
+    </div>
+  </div>
+
+  <div class="division">
+    <hr class="medium-hr">
+    <h2>Division</h2>
+    <div class="input-labels">
+      <p class="left-label">Lower Limit</p>
+      <p class="right-label">Upper Limit</p>
+    </div>
+    <div class="input-textbox">
+      <input id="divLowerLimit" type="text">
+      <input id="divUpperLimit" type="text">
+    </div>
+    <div class="errorMessage"></div>
+    <div class="display-problem">
+      <p id="divProblemLeft">&#8709;</p>
+      <p class="operator-symbol">&#247;</p>
+      <p id="divProblemRight">&#8709;</p>
+    </div>
+    <div class="solution-area">
+      <p class="operator-symbol">&#61;</p>
+      <input id="divAnswerInput" type="text">
+    </div>
+    <div class="button-area">
+      <button id="divCheckBtn">Check</button>
+      <button id="divAnswerBtn">Answer</button>
+      <button id="divNextBtn">Next</button>
+    </div>
+  </div>
+
+  <div class="collatz">
+    <hr class="medium-hr">
+    <h2>Collatz Conjecture</h2>
+    <p>Start with any positive integer <i>n</i>. If the integer is even, divide it by 2. If the integer is odd multiply it by 3 then add 1. Repeat until the sequence reaches 1.</p>
+    <p>The conjecture states that all positive integers will eventually reach 1.</p>
+    <p>Current mathematics has not been able to prove or disprove this conjecture. However, all integers tested have reached 1.</p>
+    <p>&nbsp;Enter an integer to see how many steps it takes to reach 1.</p>
+    <div class="errorMessage"></div>
+    <div class="collatz-input">
+      <input id="collatzInput" type="text">
+      <button id="collatzCheck">Check</button>
+      <p id="collatzResult"></p>
+    </div>
+  </div>
+
+  <script src="marty.js"></script>
+</body>
+</html>

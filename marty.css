@@ -1,0 +1,158 @@
+/*
+SDEV 250 Semester Project
+Marty Mammel
+*/
+
+h1, h2 { text-align: center; }
+
+.errorMessage {
+  display: none;
+  height: 20px;
+  font-size: 110%;
+  color:red;
+}
+
+.title-bar {
+  z-index: 1;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #333;
+  color: white;
+}
+
+.user-data {
+  width: 100%;
+  margin-top: 100px;
+  position: relative;
+  text-align: center;
+}
+
+.username-buttons {
+  margin-top: 10px;
+}
+
+.dataTitle {
+  font-size: 130%;
+}
+
+.correct, .incorrect {
+  width: 70px;
+  margin: 0px;
+  display: inline;
+}
+
+.addition, .subtraction, .multiplication, .division, .collatz {
+  width: 100%;
+  margin-top: 50px;
+  position: relative;
+  text-align: center;
+}
+
+.input-textbox {
+  width: 170px;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.input-labels {
+  height: 20px;
+  width: 300px;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.left-label, .right-label {
+  width: 100px;
+  display: inline-block;
+  margin: 0px;
+}
+
+.display-problem {
+  height: 40px;
+  margin-top: 20px;
+}
+
+.operator-symbol {
+  font-size: 170%;
+  font-family: sans-serif;
+  display: inline-block;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.solution-area {
+  margin-top: 20px;
+}
+
+.button-area {
+  width: 300px;
+  margin-top: 20px;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.collatz {
+  margin-bottom: 30px;
+}
+
+.small-hr { width: 15% }
+
+.medium-hr { width: 45%; }
+
+#username {
+  font-size: 200%;
+  text-decoration: underline;
+}
+
+#displayData, #addDisplay, #subDisplay, #multDisplay, #divDisplay { display: none; }
+
+#addCorrect, #addInorrect, #subCorrect, #subInorrect, #multCorrect, #multInorrect, #divCorrect, #divInorrect {
+  width: 40px;
+  margin: 0px;
+  display: inline;
+}
+
+#addLowerLimit, #subLowerLimit, #multLowerLimit, #divLowerLimit {
+  width: 50px;
+  margin-right: 20px;
+}
+
+#addUpperLimit, #subUpperLimit, #multUpperLimit, #divUpperLimit {
+  width: 50px;
+  margin-left: 20px;
+}
+
+#addProblemLeft, #subProblemLeft, #multProblemLeft, #divProblemLeft {
+  font-size: 2em;
+  display: inline-block;
+  margin-right: 10px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  outline-color: black;
+  outline-style: solid;
+  outline-width: 2px;
+}
+
+#addProblemRight, #subProblemRight, #multProblemRight, #divProblemRight {
+  font-size: 2em;
+  display: inline-block;
+  margin-left: 10px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  outline-color: black;
+  outline-style: solid;
+  outline-width: 2px;
+}
+
+#addAnswerInput, #subAnswerInput, #multAnswerInput, #divAnswerInput {
+  width: 50px;
+}
+
+#collatzInput {
+  width: 50px;
+}
