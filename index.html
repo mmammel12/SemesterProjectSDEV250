@@ -22,6 +22,7 @@
   <div class="user-data">
     <div id="inputData">
       <h2>Enter Name:</h2>
+      <p>If you do not enter a name your stats will not be tracked</p>
       <input id="usernameInput" type="text">
       <div class="errorMessage"></div>
       <div class="username-buttons">
@@ -30,7 +31,7 @@
       </div>
     </div>
     <div id="displayData">
-      <p id="username">Marty</p>
+      <p id="username"></p>
       <div id="addDisplay">
         <hr class="small-hr">
         <p class="dataTitle">Addition</p>
@@ -82,7 +83,7 @@
     </div>
   </div>
 
-  <div class="addition">
+  <div id="addition">
     <hr class="medium-hr">
     <h2>Addition</h2>
     <div class="input-labels">
@@ -110,7 +111,7 @@
     </div>
   </div>
 
-  <div class="subtraction">
+  <div id="subtraction">
     <hr class="medium-hr">
     <h2>Subtraction</h2>
     <div class="input-labels">
@@ -138,7 +139,7 @@
     </div>
   </div>
 
-  <div class="multiplication">
+  <div id="multiplication">
     <hr class="medium-hr">
     <h2>Multiplication</h2>
     <div class="input-labels">
@@ -166,7 +167,7 @@
     </div>
   </div>
 
-  <div class="division">
+  <div id="division">
     <hr class="medium-hr">
     <h2>Division</h2>
     <div class="input-labels">
@@ -194,7 +195,7 @@
     </div>
   </div>
 
-  <div class="collatz">
+  <div id="collatz">
     <hr class="medium-hr">
     <h2>Collatz Conjecture</h2>
     <p>Start with any positive integer <i>n</i>. If the integer is even, divide it by 2. If the integer is odd multiply it by 3 then add 1. Repeat until the sequence reaches 1.</p>
