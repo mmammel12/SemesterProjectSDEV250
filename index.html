@@ -41,7 +41,7 @@
         </div>
         <div class="addIncorrectData">
           <p class="incorrect">Incorrect:</p>
-          <p id="addInorrect">0</p>
+          <p id="addIncorrect">0</p>
         </div>
       </div>
       <div id="subDisplay">
@@ -53,7 +53,7 @@
         </div>
         <div class="subIncorrectData">
           <p class="incorrect">Incorrect:</p>
-          <p id="subInorrect">0</p>
+          <p id="subIncorrect">0</p>
         </div>
       </div>
       <div id="multDisplay">
@@ -65,7 +65,7 @@
         </div>
         <div class="multIncorrectData">
           <p class="incorrect">Incorrect:</p>
-          <p id="multInorrect">0</p>
+          <p id="multIncorrect">0</p>
         </div>
       </div>
       <div id="divDisplay">
@@ -77,7 +77,7 @@
         </div>
         <div class="divIncorrectData">
           <p class="incorrect">Incorrect:</p>
-          <p id="divInorrect">0</p>
+          <p id="divIncorrect">0</p>
         </div>
       </div>
     </div>
@@ -91,8 +91,8 @@
       <p class="right-label">Upper Limit</p>
     </div>
     <div class="input-textbox">
-      <input id="addLowerLimit" type="text">
-      <input id="addUpperLimit" type="text">
+      <input id="addLowerLimit" onkeypress="return isNumber(event)" type="text">
+      <input id="addUpperLimit" onkeypress="return isNumber(event)" type="text">
     </div>
     <div class="errorMessage"></div>
     <div class="display-problem">
@@ -102,7 +102,7 @@
     </div>
     <div class="solution-area">
       <p class="operator-symbol">&#61;</p>
-      <input id="addAnswerInput" type="text">
+      <input id="addAnswerInput" onkeypress="return isNumber(event)" type="text">
     </div>
     <div class="button-area">
       <button id="addCheckBtn">Check</button>
@@ -119,8 +119,8 @@
       <p class="right-label">Upper Limit</p>
     </div>
     <div class="input-textbox">
-      <input id="subLowerLimit" type="text">
-      <input id="subUpperLimit" type="text">
+      <input id="subLowerLimit" onkeypress="return isNumber(event)" type="text">
+      <input id="subUpperLimit" onkeypress="return isNumber(event)" type="text">
     </div>
     <div class="errorMessage"></div>
     <div class="display-problem">
@@ -130,7 +130,7 @@
     </div>
     <div class="solution-area">
       <p class="operator-symbol">&#61;</p>
-      <input id="subAnswerInput" type="text">
+      <input id="subAnswerInput" onkeypress="return isNumber(event)" type="text">
     </div>
     <div class="button-area">
       <button id="subCheckBtn">Check</button>
@@ -147,8 +147,8 @@
       <p class="right-label">Upper Limit</p>
     </div>
     <div class="input-textbox">
-      <input id="multLowerLimit" type="text">
-      <input id="multUpperLimit" type="text">
+      <input id="multLowerLimit" onkeypress="return isNumber(event)" type="text">
+      <input id="multUpperLimit" onkeypress="return isNumber(event)" type="text">
     </div>
     <div class="errorMessage"></div>
     <div class="display-problem">
@@ -158,7 +158,7 @@
     </div>
     <div class="solution-area">
       <p class="operator-symbol">&#61;</p>
-      <input id="multAnswerInput" type="text">
+      <input id="multAnswerInput" onkeypress="return isNumber(event)" type="text">
     </div>
     <div class="button-area">
       <button id="multCheckBtn">Check</button>
@@ -175,8 +175,8 @@
       <p class="right-label">Upper Limit</p>
     </div>
     <div class="input-textbox">
-      <input id="divLowerLimit" type="text">
-      <input id="divUpperLimit" type="text">
+      <input id="divLowerLimit" onkeypress="return isNumber(event)" type="text">
+      <input id="divUpperLimit" onkeypress="return isNumber(event)" type="text">
     </div>
     <div class="errorMessage"></div>
     <div class="display-problem">
@@ -186,7 +186,7 @@
     </div>
     <div class="solution-area">
       <p class="operator-symbol">&#61;</p>
-      <input id="divAnswerInput" type="text">
+      <input id="divAnswerInput" onkeypress="return isNumber(event)" type="text">
     </div>
     <div class="button-area">
       <button id="divCheckBtn">Check</button>
@@ -204,7 +204,7 @@
     <p>&nbsp;Enter an integer to see how many steps it takes to reach 1.</p>
     <div class="errorMessage"></div>
     <div class="collatz-input">
-      <input id="collatzInput" type="text">
+      <input id="collatzInput" onkeypress="return isNumber(event)" type="text">
       <button id="collatzCheck">Check</button>
       <p id="collatzResult"></p>
     </div>

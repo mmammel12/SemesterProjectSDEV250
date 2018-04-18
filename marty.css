@@ -116,7 +116,7 @@ h1, h2 { text-align: center; }
 
 #addDisplay, #subDisplay, #multDisplay, #divDisplay { display: none; }
 
-#addCorrect, #addInorrect, #subCorrect, #subInorrect, #multCorrect, #multInorrect, #divCorrect, #divInorrect {
+#addCorrect, #addIncorrect, #subCorrect, #subIncorrect, #multCorrect, #multIncorrect, #divCorrect, #divIncorrect {
   width: 40px;
   margin: 0px;
   display: inline;

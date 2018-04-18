@@ -70,6 +70,75 @@ function clearUsername() {
   errorDiv.style.display = "none";
 }
 
+function checkUserStats() {
+  var addDisplay = document.getElementById("addDisplay");
+  var addCorrect = document.getElementById("addCorrect");
+  var addIncorrect = document.getElementById("addIncorrect");
+  var subDisplay = document.getElementById("subDisplay");
+  var subCorrect = document.getElementById("addCorrect");
+  var subIncorrect = document.getElementById("addIncorrect");
+  var multDisplay = document.getElementById("multDisplay");
+  var multCorrect = document.getElementById("addCorrect");
+  var multIncorrect = document.getElementById("addIncorrect");
+  var divDisplay = document.getElementById("divDisplay");
+  var divCorrect = document.getElementById("addCorrect");
+  var divIncorrect = document.getElementById("addIncorrect");
+
+  if (addDisplay.style.display === "" && (User.addCorrect >= 1 || User.addIncorrect >= 1)) {
+    addDisplay.style.display = "block";
+    addCorrect.innerHTML = User.addCorrect;
+    addIncorrect.innerHTML = User.addIncorrect;
+  } else if (addDisplay.style.display === "block") {
+    addCorrect.innerHTML = User.addCorrect;
+    addIncorrect.innerHTML = User.addIncorrect;
+  }
+}
+
+/*
+##     ##    ###    ##       #### ########     ###    ######## ####  #######  ##    ##
+##     ##   ## ##   ##        ##  ##     ##   ## ##      ##     ##  ##     ## ###   ##
+##     ##  ##   ##  ##        ##  ##     ##  ##   ##     ##     ##  ##     ## ####  ##
+##     ## ##     ## ##        ##  ##     ## ##     ##    ##     ##  ##     ## ## ## ##
+ ##   ##  ######### ##        ##  ##     ## #########    ##     ##  ##     ## ##  ####
+  ## ##   ##     ## ##        ##  ##     ## ##     ##    ##     ##  ##     ## ##   ###
+   ###    ##     ## ######## #### ########  ##     ##    ##    ####  #######  ##    ##
+*/
+
+function isNumber(evt) {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+    }
+    return true;
+}
+
+function validateAnswerInput(userAnswer, correctAnswer, answerTextbox) {
+  if (userAnswer === correctAnswer) {
+    setTextboxCorrect(answerTextbox);
+    return true;
+  } else {
+    setTextboxIncorrect(answerTextbox);
+    return false;
+  }
+}
+
+function setTextboxCorrect(answerTextbox) {
+  answerTextbox.style.backgroundColor = "lime";
+  answerTextbox.disabled = true;
+}
+
+function setTextboxIncorrect(answerTextbox) {
+  answerTextbox.style.backgroundColor = "red";
+  answerTextbox.disabled = true;
+}
+
+function resetAnswerInput(answerTextbox) {
+  answerTextbox.style.backgroundColor = "white";
+  answerTextbox.value = "";
+  answerTextbox.disabled = false;
+}
+
 /*
    ###    ########  ########  #### ######## ####  #######  ##    ##
   ## ##   ##     ## ##     ##  ##     ##     ##  ##     ## ###   ##
@@ -80,35 +149,30 @@ function clearUsername() {
 ##     ## ########  ########  ####    ##    ####  #######  ##    ##
 */
 
-function addValidateLimits() {
-  var addLowerLimit = document.getElementById("addLowerLimit").value;
-  var addUpperLimit = document.getElementById("addUpperLimit").value;
+function addCreateProblem(lowerLimit, upperLimit) {
   var leftNumber = document.getElementById("addProblemLeft");
-  var rightNumber = document.getElementById("addProblemRight");document.getElementById("addProblemLeft")
+  var rightNumber = document.getElementById("addProblemRight");
+  leftNumber.innerHTML = Math.floor(Math.random() * (upperLimit - lowerLimit)) + lowerLimit;
+  rightNumber.innerHTML = Math.floor(Math.random() * (upperLimit - lowerLimit)) + lowerLimit;
+}
+
+function addValidateLimits() {
+  var addLowerLimit = parseInt(document.getElementById("addLowerLimit").value);
+  var addUpperLimit = parseInt(document.getElementById("addUpperLimit").value);
   var errorDiv = document.querySelector("#addition .errorMessage");
+  var answerTextbox = document.getElementById("addAnswerInput");
   errorDiv.style.display = "none";
+  resetAnswerInput(document.getElementById("addAnswerInput"));
 
   try {
     if (addLowerLimit != "" && addUpperLimit != "") {
-      if (!addLowerLimit.match(/^[0-9]+$/)) {
-        throw "Lower Limit must be an integer";
-      } else if (!addUpperLimit.match(/^[0-9]+$/)) {
-        throw "Upper Limit must be an integer";
-      } else { // numbers in both text boxes, convert to int
-        var lowerLimit = parseInt(addLowerLimit);
-        var upperLimit = parseInt(addUpperLimit);
-
-        if (lowerLimit < upperLimit) {
-          leftNumber.innerHTML = "";
-          leftNumber.innerHTML = Math.floor(Math.random() * (upperLimit - lowerLimit)) + lowerLimit;
-          rightNumber.innerHTML = "";
-          rightNumber.innerHTML = Math.floor(Math.random() * (upperLimit - lowerLimit)) + lowerLimit;
-        } else if (lowerLimit >= upperLimit) {
+        if (addLowerLimit < addUpperLimit) {
+          addCreateProblem(addLowerLimit, addUpperLimit);
+        } else if (addLowerLimit >= addUpperLimit) {
           throw "Lower Limit must be less than Upper Limit"
         }
       }
     }
-  }
   catch (msg) {
     errorDiv.innerHTML = msg;
     errorDiv.style.display = "block";
@@ -116,17 +180,54 @@ function addValidateLimits() {
 }
 
 function checkAddAnswer() {
-  //TODO check addition answer
+  var answerTextbox = document.getElementById("addAnswerInput");
+  var userAnswer = parseInt(answerTextbox.value);
+  var leftNumber = parseInt(document.getElementById("addProblemLeft").innerHTML);
+  var rightNumber = parseInt(document.getElementById("addProblemRight").innerHTML);
+  var correctAnswer = leftNumber + rightNumber;
+
+  if (userAnswer && correctAnswer && (answerTextbox.style.backgroundColor === "white" || answerTextbox.style.backgroundColor === "")) {
+    if (validateAnswerInput(userAnswer, correctAnswer, answerTextbox) && User.name != "") {
+      User.addCorrect++
+    } else if (User.name != ""){
+      User.addIncorrect++
+    }
+  }
+
+  if (User.name != "") {
+    checkUserStats();
+  }
+}
+
+function addDisplayAnswer() {
+  var answerTextbox = document.getElementById("addAnswerInput");
+  var correctAnswer = parseInt(document.getElementById("addProblemLeft").innerHTML) + parseInt(document.getElementById("addProblemRight").innerHTML);
+  if (answerTextbox.style.backgroundColor != "lime" && correctAnswer >= 2) {
+    if (User.name != "" && answerTextbox.value != correctAnswer) {
+      User.addIncorrect++;
+      checkUserStats();
+    }
+    answerTextbox.value = correctAnswer;
+    setTextboxIncorrect(answerTextbox);
+  }
 }
 
 /*
-######## ##     ## ######## ##    ## ######## ##       ####  ######  ######## ######## ##    ## ######## ########   ######
-##       ##     ## ##       ###   ##    ##    ##        ##  ##    ##    ##    ##       ###   ## ##       ##     ## ##    ##
-##       ##     ## ##       ####  ##    ##    ##        ##  ##          ##    ##       ####  ## ##       ##     ## ##
-######   ##     ## ######   ## ## ##    ##    ##        ##   ######     ##    ######   ## ## ## ######   ########   ######
-##        ##   ##  ##       ##  ####    ##    ##        ##        ##    ##    ##       ##  #### ##       ##   ##         ##
-##         ## ##   ##       ##   ###    ##    ##        ##  ##    ##    ##    ##       ##   ### ##       ##    ##  ##    ##
-########    ###    ######## ##    ##    ##    ######## ####  ######     ##    ######## ##    ## ######## ##     ##  ######
+######## ##     ## ######## ##    ## ########
+##       ##     ## ##       ###   ##    ##
+##       ##     ## ##       ####  ##    ##
+######   ##     ## ######   ## ## ##    ##
+##        ##   ##  ##       ##  ####    ##
+##         ## ##   ##       ##   ###    ##
+########    ###    ######## ##    ##    ##
+
+##       ####  ######  ######## ######## ##    ## ######## ########   ######
+##        ##  ##    ##    ##    ##       ###   ## ##       ##     ## ##    ##
+##        ##  ##          ##    ##       ####  ## ##       ##     ## ##
+##        ##   ######     ##    ######   ## ## ## ######   ########   ######
+##        ##        ##    ##    ##       ##  #### ##       ##   ##         ##
+##        ##  ##    ##    ##    ##       ##   ### ##       ##    ##  ##    ##
+######## ####  ######     ##    ######## ##    ## ######## ##     ##  ######
 */
 
 function createEventListeners() {
@@ -135,8 +236,8 @@ function createEventListeners() {
   var unAccept = document.getElementById("usernameAcceptBtn");
   var unClear = document.getElementById("usernameClearBtn");
   // addition buttons
-  var addCheck = document.getElementById("addCheckBtn"); //TODO
-  var addAnswer = document.getElementById("addAnswerBtn"); //TODO
+  var addCheck = document.getElementById("addCheckBtn");
+  var addAnswer = document.getElementById("addAnswerBtn");
   var addNext = document.getElementById("addNextBtn"); //TODO
   // subtraction buttons
   var subCheck = document.getElementById("subCheckBtn"); //TODO
@@ -174,11 +275,13 @@ function createEventListeners() {
     unClear.addEventListener("click", clearUsername, false);
     // addition buttons
     addCheck.addEventListener("click", checkAddAnswer, false);
+    addAnswer.addEventListener("click", addDisplayAnswer, false);
+    addNext.addEventListener("click", addValidateLimits, false);
 
     /// text boxes
     // addition text boxes
-    addLowerLimit.addEventListener("change", addValidateLimits, false);
-    addUpperLimit.addEventListener("change", addValidateLimits, false);
+    addLowerLimit.addEventListener("keyup", addValidateLimits, false);
+    addUpperLimit.addEventListener("keyup", addValidateLimits, false);
   } else if (unAccept.attachEvent) {
     /// buttons
     // username buttons
@@ -186,11 +289,13 @@ function createEventListeners() {
     unClear.attachEvent("onclick", clearUsername);
     // addition buttons
     addCheck.attachEvent("onclick", checkAddAnswer);
+    addAnswer.attachEvent("onclick", addDisplayAnswer);
+    addNext.addEventListener("onclick", addValidateLimits);
 
     /// text boxes
     // addition text boxes
-    addLowerLimit.attachEvent("onchange", addValidateLimits, false);
-    addUpperLimit.attachEvent("onchange", addValidateLimits, false);
+    addLowerLimit.attachEvent("onkeyup", addValidateLimits, false);
+    addUpperLimit.attachEvent("onkeyup", addValidateLimits, false);
   }
 }
 
