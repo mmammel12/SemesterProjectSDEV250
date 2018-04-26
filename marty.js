@@ -233,7 +233,7 @@ function addValidateLimits() {
   try {
     if (addLowerLimit != "" && addUpperLimit != "") {
         if (addLowerLimit < addUpperLimit) {
-          addUpperLimit++
+          addUpperLimit++;
           addCreateProblem(addLowerLimit, addUpperLimit);
         } else if (addLowerLimit >= addUpperLimit) {
           throw "Lower Limit must be less than Upper Limit"
