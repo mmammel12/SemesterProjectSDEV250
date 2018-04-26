@@ -383,6 +383,74 @@ function multDisplayAnswer() {
 }
 
 /*
+########  #### ##     ## ####  ######  ####  #######  ##    ##
+##     ##  ##  ##     ##  ##  ##    ##  ##  ##     ## ###   ##
+##     ##  ##  ##     ##  ##  ##        ##  ##     ## ####  ##
+##     ##  ##  ##     ##  ##   ######   ##  ##     ## ## ## ##
+##     ##  ##   ##   ##   ##        ##  ##  ##     ## ##  ####
+##     ##  ##    ## ##    ##  ##    ##  ##  ##     ## ##   ###
+########  ####    ###    ####  ######  ####  #######  ##    ##
+
+*/
+
+function divCreateProblem(lowerLimit, upperLimit) {
+  var leftNumber = document.getElementById("divProblemLeft");
+  var rightNumber = document.getElementById("divProblemRight");
+  leftNumber.innerHTML = Math.floor(Math.random() * (upperLimit - lowerLimit)) + lowerLimit;
+  rightNumber.innerHTML = Math.floor(Math.random() * (upperLimit - lowerLimit)) + lowerLimit;
+  while (parseInt(leftNumber.innerHTML) % parseInt(rightNumber.innerHTML) != 0) {
+    leftNumber.innerHTML = Math.floor(Math.random() * (upperLimit - lowerLimit)) + lowerLimit;
+    rightNumber.innerHTML = Math.floor(Math.random() * (upperLimit - lowerLimit)) + lowerLimit;
+  }
+}
+
+function divValidateLimits() {
+  var divLowerLimit = parseInt(document.getElementById("divLowerLimit").value);
+  var divUpperLimit = parseInt(document.getElementById("divUpperLimit").value);
+  var errorDiv = document.querySelector("#division .errorMessage");
+  var answerTextbox = document.getElementById("divAnswerInput");
+  errorDiv.style.display = "none";
+  resetAnswerInput(answerTextbox);
+
+  try {
+    if (divLowerLimit != "" && divUpperLimit != "") {
+      if (divLowerLimit < divUpperLimit) {
+        divCreateProblem(divLowerLimit, divUpperLimit);
+      } else if (divLowerLimit >= divUpperLimit) {
+        throw "Lower Limit must be less than Upper Limit"
+      }
+    }
+  }
+  catch (msg) {
+    errorDiv.innerHTML = msg;
+    errorDiv.style.display = "block";
+  }
+}
+
+function divCheckAnswer() {
+  var answerTextbox = document.getElementById("divAnswerInput");
+  var userAnswer = parseInt(answerTextbox.value);
+  var leftNumber = parseInt(document.getElementById("divProblemLeft").innerHTML);
+  var rightNumber = parseInt(document.getElementById("divProblemRight").innerHTML);
+  var correctAnswer = leftNumber / rightNumber;
+
+  validateAnswerInput(userAnswer, correctAnswer, answerTextbox, "division");
+}
+
+function divDisplayAnswer() {
+  var answerTextbox = document.getElementById("divAnswerInput");
+  var correctAnswer = parseInt(document.getElementById("divProblemLeft").innerHTML) / parseInt(document.getElementById("divProblemRight").innerHTML);
+  if (answerTextbox.style.backgroundColor != "lime" && correctAnswer >= 1) {
+    if (User.name != "" && answerTextbox.value != correctAnswer) {
+      User.divIncorrect++;
+      checkUserStats();
+    }
+    answerTextbox.value = correctAnswer;
+    setTextboxIncorrect(answerTextbox);
+  }
+}
+
+/*
 ######## ##     ## ######## ##    ## ########
 ##       ##     ## ##       ###   ##    ##
 ##       ##     ## ##       ####  ##    ##
@@ -414,13 +482,13 @@ function createEventListeners() {
   var subAnswer = document.getElementById("subAnswerBtn");
   var subNext = document.getElementById("subNextBtn");
   // multiplication buttons
-  var multCheck = document.getElementById("multCheckBtn"); //TODO
-  var multAnswer = document.getElementById("multAnswerBtn"); //TODO
+  var multCheck = document.getElementById("multCheckBtn");
+  var multAnswer = document.getElementById("multAnswerBtn");
   var multNext = document.getElementById("multNextBtn");
   // division buttons
-  var divCheck = document.getElementById("divCheckBtn"); //TODO
-  var divAnswer = document.getElementById("divAnswerBtn"); //TODO
-  var divNext = document.getElementById("divNextBtn"); //TODO
+  var divCheck = document.getElementById("divCheckBtn");
+  var divAnswer = document.getElementById("divAnswerBtn");
+  var divNext = document.getElementById("divNextBtn");
   // collatz button
   var collatzCheck = document.getElementById("collatzCheck"); //TODO
 
@@ -432,11 +500,11 @@ function createEventListeners() {
   var subLowerLimit = document.getElementById("subLowerLimit");
   var subUpperLimit = document.getElementById("subUpperLimit");
   // multiplication text boxes
-  var multLowerLimit = document.getElementById("multLowerLimit"); //TODO
-  var multUpperLimit = document.getElementById("multUpperLimit"); //TODO
+  var multLowerLimit = document.getElementById("multLowerLimit");
+  var multUpperLimit = document.getElementById("multUpperLimit");
   // division text boxes
-  var divLowerLimit = document.getElementById("divLowerLimit"); //TODO
-  var divUpperLimit = document.getElementById("divUpperLimit"); //TODO
+  var divLowerLimit = document.getElementById("divLowerLimit");
+  var divUpperLimit = document.getElementById("divUpperLimit");
 
   if (unAccept.addEventListener) {
     /// buttons
@@ -455,6 +523,10 @@ function createEventListeners() {
     multCheck.addEventListener("click", multCheckAnswer, false);
     multAnswer.addEventListener("click", multDisplayAnswer, false);
     multNext.addEventListener("click", multValidateLimits, false);
+    // division
+    divCheck.addEventListener("click", divCheckAnswer, false);
+    divAnswer.addEventListener("click", divDisplayAnswer, false);
+    divNext.addEventListener("click", divValidateLimits, false);
 
     /// text boxes
     // addition text boxes
@@ -466,6 +538,9 @@ function createEventListeners() {
     // multiplication text boxes
     multLowerLimit.addEventListener("keyup", multValidateLimits, false);
     multUpperLimit.addEventListener("keyup", multValidateLimits, false);
+    // division
+    divLowerLimit.addEventListener("keyup", divValidateLimits, false);
+    divUpperLimit.addEventListener("keyup", divValidateLimits, false);
   } else if (unAccept.attachEvent) {
     /// buttons
     // username buttons
@@ -483,6 +558,10 @@ function createEventListeners() {
     multCheck.attachEvent("onclick", multCheckAnswer);
     multAnswer.attachEvent("onclick", multDisplayAnswer);
     multNext.attachEvent("onclick", multValidateLimits);
+    // division
+    divCheck.attachEvent("onclick", divCheckAnswer);
+    divAnswer.attachEvent("onclick", divDisplayAnswer);
+    divNext.attachEvent("onclick", divValidateLimits);
 
     /// text boxes
     // addition text boxes
@@ -494,6 +573,9 @@ function createEventListeners() {
     // multiplication text boxes
     multLowerLimit.attachEvent("onkeyup", multValidateLimits);
     multUpperLimit.attachEvent("onkeyup", multValidateLimits);
+    // division
+    divLowerLimit.attachEvent("onkeyup", divValidateLimits);
+    divUpperLimit.attachEvent("onkeyup", divValidateLimits);
   }
 }
 
