@@ -471,6 +471,37 @@ function divDisplayAnswer() {
 }
 
 /*
+########  ########  #### ##     ## ########
+##     ## ##     ##  ##  ###   ### ##
+##     ## ##     ##  ##  #### #### ##
+########  ########   ##  ## ### ## ######
+##        ##   ##    ##  ##     ## ##
+##        ##    ##   ##  ##     ## ##
+##        ##     ## #### ##     ## ########
+*/
+
+function primeChecker() {
+  var primeResult = document.getElementById("primeResult");
+  var primeInput = parseInt(document.getElementById("primeInput").value);
+  var sqrt = Math.sqrt(primeInput);
+
+  if (primeInput % 2 === 0) {
+    primeResult.innerHTML = primeInput + " is not a prime number because it is even";
+  } else if (sqrt % 1 === 0) {
+    primeResult.innerHTML = primeInput + " is not a prime number because it is a square number with a square root of " + sqrt;
+  } else {
+    for (var i=3; i<=Math.round(sqrt); i++) {
+      if (primeInput % i === 0) {
+        primeResult.innerHTML = primeInput + " is not a prime number, it's first divisor is " + i;
+        break;
+      } else {
+        primeResult.innerHTML = primeInput + " is a prime number";
+      }
+    }
+  }
+}
+
+/*
 ######## ##     ## ######## ##    ## ########
 ##       ##     ## ##       ###   ##    ##
 ##       ##     ## ##       ####  ##    ##
@@ -509,8 +540,8 @@ function createEventListeners() {
   var divCheck = document.getElementById("divCheckBtn");
   var divAnswer = document.getElementById("divAnswerBtn");
   var divNext = document.getElementById("divNextBtn");
-  // collatz button
-  var collatzCheck = document.getElementById("collatzCheck"); //TODO
+  // prime button
+  var primeCheck = document.getElementById("primeCheck");
 
   /// variables to store text boxes
   // addition text boxes
@@ -543,10 +574,12 @@ function createEventListeners() {
     multCheck.addEventListener("click", multCheckAnswer, false);
     multAnswer.addEventListener("click", multDisplayAnswer, false);
     multNext.addEventListener("click", multValidateLimits, false);
-    // division
+    // division buttons
     divCheck.addEventListener("click", divCheckAnswer, false);
     divAnswer.addEventListener("click", divDisplayAnswer, false);
     divNext.addEventListener("click", divValidateLimits, false);
+    // prime button
+    primeCheck.addEventListener("click", primeChecker, false);
 
     /// text boxes
     // addition text boxes
@@ -578,10 +611,12 @@ function createEventListeners() {
     multCheck.attachEvent("onclick", multCheckAnswer);
     multAnswer.attachEvent("onclick", multDisplayAnswer);
     multNext.attachEvent("onclick", multValidateLimits);
-    // division
+    // division buttons
     divCheck.attachEvent("onclick", divCheckAnswer);
     divAnswer.attachEvent("onclick", divDisplayAnswer);
     divNext.attachEvent("onclick", divValidateLimits);
+    // prime button
+    primeCheck.attachEvent("onclick", primeCheck);
 
     /// text boxes
     // addition text boxes

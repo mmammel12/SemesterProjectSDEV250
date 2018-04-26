@@ -195,19 +195,22 @@
     </div>
   </div>
 
-  <div id="collatz">
+  <div id="prime">
     <hr class="medium-hr">
-    <h2>Collatz Conjecture</h2>
-    <p>Start with any positive integer <i>n</i>. If the integer is even, divide it by 2. If the integer is odd multiply it by 3 then add 1. Repeat until the sequence reaches 1.</p>
-    <p>The conjecture states that all positive integers will eventually reach 1.</p>
-    <p>Current mathematics has not been able to prove or disprove this conjecture. However, all integers tested have reached 1.</p>
-    <p>&nbsp;Enter an integer to see how many steps it takes to reach 1.</p>
+    <h2>Prime Number Check</h2>
+    <p>A number is prime if it is divisible only by 1 and itself</p>
+    <p>&nbsp;Enter an integer to check if it is prime.</p>
     <div class="errorMessage"></div>
-    <div class="collatz-input">
-      <input id="collatzInput" onkeypress="return isNumber(event)" type="text">
-      <button id="collatzCheck">Check</button>
-      <p id="collatzResult"></p>
+    <div class="prime-input">
+      <input id="primeInput" onkeypress="return isNumber(event)" type="text">
+      <button id="primeCheck">Check</button>
+      <p id="primeResult"></p>
     </div>
+  </div>
+
+  <div class="footer-bar">
+    <hr>
+    <p>Marty Mammel 2018</p>
   </div>
 
   <script src="marty.js"></script>
