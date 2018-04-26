@@ -485,7 +485,11 @@ function primeChecker() {
   var primeInput = parseInt(document.getElementById("primeInput").value);
   var sqrt = Math.sqrt(primeInput);
 
-  if (primeInput % 2 === 0) {
+  if (primeInput === 1) {
+    primeResult.innerHTML = primeInput + " is not a prime number";
+  } else if (primeInput === 2) {
+    primeResult.innerHTML = primeInput + " is a prime number, it is the only even prime";
+  } else if (primeInput % 2 === 0) {
     primeResult.innerHTML = primeInput + " is not a prime number because it is even";
   } else if (sqrt % 1 === 0) {
     primeResult.innerHTML = primeInput + " is not a prime number because it is a square number with a square root of " + sqrt;
