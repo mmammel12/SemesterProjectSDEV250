@@ -100,6 +100,22 @@ function checkUserStats() {
     subCorrect.innerHTML = User.subCorrect;
     subIncorrect.innerHTML = User.subIncorrect;
   }
+  if (multDisplay.style.display === "" && (User.multCorrect >= 1 || User.multIncorrect >= 1)) {
+    multDisplay.style.display = "block";
+    multCorrect.innerHTML = User.multCorrect;
+    multIncorrect.innerHTML = User.multIncorrect;
+  } else if (multDisplay.style.display === "block") {
+    multCorrect.innerHTML = User.multCorrect;
+    multIncorrect.innerHTML = User.multIncorrect;
+  }
+  if (divDisplay.style.display === "" && (User.divCorrect >= 1 || User.divIncorrect >= 1)) {
+    divDisplay.style.display = "block";
+    divCorrect.innerHTML = User.divCorrect;
+    divIncorrect.innerHTML = User.divIncorrect;
+  } else if (divDisplay.style.display === "block") {
+    divCorrect.innerHTML = User.divCorrect;
+    divIncorrect.innerHTML = User.divIncorrect;
+  }
 }
 
 /*
@@ -217,6 +233,7 @@ function addValidateLimits() {
   try {
     if (addLowerLimit != "" && addUpperLimit != "") {
         if (addLowerLimit < addUpperLimit) {
+          addUpperLimit++
           addCreateProblem(addLowerLimit, addUpperLimit);
         } else if (addLowerLimit >= addUpperLimit) {
           throw "Lower Limit must be less than Upper Limit"
@@ -284,6 +301,7 @@ function subValidateLimits() {
   try {
     if (subLowerLimit != "" && subUpperLimit != "") {
       if (subLowerLimit < subUpperLimit) {
+        subUpperLimit++;
         subCreateProblem(subLowerLimit, subUpperLimit);
       } else if (subLowerLimit >= subUpperLimit) {
         throw "Lower Limit must be less than Upper Limit"
@@ -347,6 +365,7 @@ function multValidateLimits() {
   try {
     if (multLowerLimit != "" && multUpperLimit != "") {
       if (multLowerLimit < multUpperLimit) {
+        multUpperLimit++;
         multCreateProblem(multLowerLimit, multUpperLimit);
       } else if (multLowerLimit >= multUpperLimit) {
         throw "Lower Limit must be less than Upper Limit"
@@ -415,6 +434,7 @@ function divValidateLimits() {
   try {
     if (divLowerLimit != "" && divUpperLimit != "") {
       if (divLowerLimit < divUpperLimit) {
+        divUpperLimit++;
         divCreateProblem(divLowerLimit, divUpperLimit);
       } else if (divLowerLimit >= divUpperLimit) {
         throw "Lower Limit must be less than Upper Limit"
