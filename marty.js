@@ -316,7 +316,70 @@ function subDisplayAnswer() {
   }
   answerTextbox.value = correctAnswer;
   setTextboxIncorrect(answerTextbox);
+  }
 }
+
+/*
+##     ## ##     ## ##       ######## #### ########  ##       ####  ######     ###    ######## ####  #######  ##    ##
+###   ### ##     ## ##          ##     ##  ##     ## ##        ##  ##    ##   ## ##      ##     ##  ##     ## ###   ##
+#### #### ##     ## ##          ##     ##  ##     ## ##        ##  ##        ##   ##     ##     ##  ##     ## ####  ##
+## ### ## ##     ## ##          ##     ##  ########  ##        ##  ##       ##     ##    ##     ##  ##     ## ## ## ##
+##     ## ##     ## ##          ##     ##  ##        ##        ##  ##       #########    ##     ##  ##     ## ##  ####
+##     ## ##     ## ##          ##     ##  ##        ##        ##  ##    ## ##     ##    ##     ##  ##     ## ##   ###
+##     ##  #######  ########    ##    #### ##        ######## ####  ######  ##     ##    ##    ####  #######  ##    ##
+*/
+
+function multCreateProblem(lowerLimit, upperLimit) {
+  var leftNumber = document.getElementById("multProblemLeft");
+  var rightNumber = document.getElementById("multProblemRight");
+  leftNumber.innerHTML = Math.floor(Math.random() * (upperLimit - lowerLimit)) + lowerLimit;
+  rightNumber.innerHTML = Math.floor(Math.random() * (upperLimit - lowerLimit)) + lowerLimit;
+}
+
+function multValidateLimits() {
+  var multLowerLimit = parseInt(document.getElementById("multLowerLimit").value);
+  var multUpperLimit = parseInt(document.getElementById("multUpperLimit").value);
+  var errorDiv = document.querySelector("#multiplication .errorMessage");
+  var answerTextbox = document.getElementById("multAnswerInput");
+  errorDiv.style.display = "none";
+  resetAnswerInput(answerTextbox);
+
+  try {
+    if (multLowerLimit != "" && multUpperLimit != "") {
+      if (multLowerLimit < multUpperLimit) {
+        multCreateProblem(multLowerLimit, multUpperLimit);
+      } else if (multLowerLimit >= multUpperLimit) {
+        throw "Lower Limit must be less than Upper Limit"
+      }
+    }
+  }
+  catch (msg) {
+    errorDiv.innerHTML = msg;
+    errorDiv.style.display = "block";
+  }
+}
+
+function multCheckAnswer() {
+  var answerTextbox = document.getElementById("multAnswerInput");
+  var userAnswer = parseInt(answerTextbox.value);
+  var leftNumber = parseInt(document.getElementById("multProblemLeft").innerHTML);
+  var rightNumber = parseInt(document.getElementById("multProblemRight").innerHTML);
+  var correctAnswer = leftNumber * rightNumber;
+
+  validateAnswerInput(userAnswer, correctAnswer, answerTextbox, "multiplication");
+}
+
+function multDisplayAnswer() {
+  var answerTextbox = document.getElementById("multAnswerInput");
+  var correctAnswer = parseInt(document.getElementById("multProblemLeft").innerHTML) * parseInt(document.getElementById("multProblemRight").innerHTML);
+  if (answerTextbox.style.backgroundColor != "lime" && correctAnswer >= 1) {
+    if (User.name != "" && answerTextbox.value != correctAnswer) {
+      User.multIncorrect++;
+      checkUserStats();
+    }
+    answerTextbox.value = correctAnswer;
+    setTextboxIncorrect(answerTextbox);
+  }
 }
 
 /*
@@ -353,7 +416,7 @@ function createEventListeners() {
   // multiplication buttons
   var multCheck = document.getElementById("multCheckBtn"); //TODO
   var multAnswer = document.getElementById("multAnswerBtn"); //TODO
-  var multNext = document.getElementById("multNextBtn"); //TODO
+  var multNext = document.getElementById("multNextBtn");
   // division buttons
   var divCheck = document.getElementById("divCheckBtn"); //TODO
   var divAnswer = document.getElementById("divAnswerBtn"); //TODO
@@ -366,8 +429,8 @@ function createEventListeners() {
   var addLowerLimit = document.getElementById("addLowerLimit");
   var addUpperLimit = document.getElementById("addUpperLimit");
   // subtraction text boxes
-  var subLowerLimit = document.getElementById("subLowerLimit"); //TODO
-  var subUpperLimit = document.getElementById("subUpperLimit"); //TODO
+  var subLowerLimit = document.getElementById("subLowerLimit");
+  var subUpperLimit = document.getElementById("subUpperLimit");
   // multiplication text boxes
   var multLowerLimit = document.getElementById("multLowerLimit"); //TODO
   var multUpperLimit = document.getElementById("multUpperLimit"); //TODO
@@ -388,6 +451,10 @@ function createEventListeners() {
     subCheck.addEventListener("click", subCheckAnswer, false);
     subAnswer.addEventListener("click", subDisplayAnswer, false);
     subNext.addEventListener("click", subValidateLimits, false);
+    // multiplication
+    multCheck.addEventListener("click", multCheckAnswer, false);
+    multAnswer.addEventListener("click", multDisplayAnswer, false);
+    multNext.addEventListener("click", multValidateLimits, false);
 
     /// text boxes
     // addition text boxes
@@ -396,6 +463,9 @@ function createEventListeners() {
     // subtraction text boxes
     subLowerLimit.addEventListener("keyup", subValidateLimits, false);
     subUpperLimit.addEventListener("keyup", subValidateLimits, false);
+    // multiplication text boxes
+    multLowerLimit.addEventListener("keyup", multValidateLimits, false);
+    multUpperLimit.addEventListener("keyup", multValidateLimits, false);
   } else if (unAccept.attachEvent) {
     /// buttons
     // username buttons
@@ -409,13 +479,21 @@ function createEventListeners() {
     subCheck.attachEvent("onclick", subCheckAnswer);
     subAnswer.attachEvent("onclick", subDisplayAnswer);
     subNext.attachEvent("onclick", subValidateLimits);
+    // multiplication buttons
+    multCheck.attachEvent("onclick", multCheckAnswer);
+    multAnswer.attachEvent("onclick", multDisplayAnswer);
+    multNext.attachEvent("onclick", multValidateLimits);
+
     /// text boxes
     // addition text boxes
-    addLowerLimit.attachEvent("onkeyup", addValidateLimits, false);
-    addUpperLimit.attachEvent("onkeyup", addValidateLimits, false);
+    addLowerLimit.attachEvent("onkeyup", addValidateLimits);
+    addUpperLimit.attachEvent("onkeyup", addValidateLimits);
     // subtraction text boxes
     subLowerLimit.attachEvent("onkeyup", subValidateLimits);
     subUpperLimit.attachEvent("onkeyup", subValidateLimits);
+    // multiplication text boxes
+    multLowerLimit.attachEvent("onkeyup", multValidateLimits);
+    multUpperLimit.attachEvent("onkeyup", multValidateLimits);
   }
 }
 
