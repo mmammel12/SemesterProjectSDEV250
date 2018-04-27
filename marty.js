@@ -486,15 +486,17 @@ function primeChecker() {
   var sqrt = Math.sqrt(primeInput);
 
   if (primeInput === 1) {
-    primeResult.innerHTML = primeInput + " is not a prime number";
+    primeResult.innerHTML = "1 is not a prime number";
   } else if (primeInput === 2) {
-    primeResult.innerHTML = primeInput + " is a prime number, it is the only even prime";
+    primeResult.innerHTML = "2 is a prime number, it is the only even prime";
   } else if (primeInput % 2 === 0) {
     primeResult.innerHTML = primeInput + " is not a prime number because it is even";
+  } else if (primeInput === 3) {
+    primeResult.innerHTML = "3 is a prime number";
   } else if (sqrt % 1 === 0) {
     primeResult.innerHTML = primeInput + " is not a prime number because it is a square number with a square root of " + sqrt;
   } else {
-    for (var i=3; i<=Math.round(sqrt); i++) {
+    for (var i=2; i<=Math.floor(sqrt); i++) {
       if (primeInput % i === 0) {
         primeResult.innerHTML = primeInput + " is not a prime number, it's first divisor is " + i;
         break;
